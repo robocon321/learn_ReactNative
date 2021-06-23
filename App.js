@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 import CategoryListItem from './components/CategoryListItem';
 
 export default class App extends React.Component{
@@ -19,16 +19,12 @@ export default class App extends React.Component{
   render(){
     const {categories} = this.state;
     return (
-      <View style={styles.container}>
-        <ScrollView style={{paddingLeft:16, paddingRight:16}}>
-          {
-            categories.map((item)=>{
-              return <CategoryListItem key={item.id} category={item}/>
-            })
-          }
-        </ScrollView>
-      </View>
-    );
+        <FlatList contentContainerStyle={{paddingLeft:16, paddingRight:16}} 
+                  data={categories}
+                  renderItem={({item}) => <CategoryListItem category={item}/>}
+                  keyExtractor={(item)=> `${item.id}`}
+        />
+      );
   }
 }
 

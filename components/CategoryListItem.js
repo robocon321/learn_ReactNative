@@ -9,7 +9,7 @@ import HtmlImage from '../assets/html.png';
 
 export default function CategoryListItem(props){
     const {category} = props;
-    console.log(category);
+
     return (
         <View style={styles.categoryView}>
             <Text style={styles.categoryText}>{category.name}</Text>
