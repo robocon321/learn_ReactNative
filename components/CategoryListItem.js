@@ -10,12 +10,10 @@ import {
 import HtmlImage from '../assets/html.png';
 
 export default function CategoryListItem(props){
-    const {category} = props;
+    const {category, onPress} = props;
 
     return (
-        <TouchableOpacity activeOpacity={0.5} onPress={()=>{
-            Alert.alert("Title", "Message");
-        }}>
+        <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
             <View style={styles.categoryView}>
                 <Text style={styles.categoryText}>{category.name}</Text>
                 <Image style={styles.categoryImage} source={HtmlImage}/>

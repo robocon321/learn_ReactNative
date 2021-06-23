@@ -1,30 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
+import {createStackNavigator} from '@react-navigation/stack'
+import {NavigationContainer} from '@react-navigation/native'
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
-import CategoryListItem from './components/CategoryListItem';
+import { StyleSheet} from 'react-native';
+import Category from "./screen/Category";
+import Categories from "./screen/Categories.js";
 
 export default class App extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      categories: [
-        {id: 1, name: "HTML"},
-        {id: 2, name: "CSS"},
-        {id: 3, name: "Java"},
-        {id: 4, name: "Javascript"},
-        {id: 5, name: "Python"}
-      ]
-    }
-  }
+  
   render(){
-    const {categories} = this.state;
-    return (
-        <FlatList contentContainerStyle={{paddingLeft:16, paddingRight:16}} 
-                  data={categories}
-                  renderItem={({item}) => <CategoryListItem category={item}/>}
-                  keyExtractor={(item)=> `${item.id}`}
-        />
-      );
+    const Stack = createStackNavigator();
+    
+    return(
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Categories">
+          <Stack.Screen name="Category" component={Category} />
+          <Stack.Screen name="Categories" component={Categories} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
   }
 }
 
