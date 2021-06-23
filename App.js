@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 
 export default class App extends React.Component{
   
@@ -7,7 +7,10 @@ export default class App extends React.Component{
     
     return(
       <View style={styles.container}>
-        <Text>Hello world</Text>
+          <View style={styles.activityIndicator}>
+            <ActivityIndicator color="blue" size="large"/>
+            <ActivityIndicator color="purple" size="small" />            
+          </View>
       </View>
     )
   }
@@ -22,4 +25,8 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     paddingLeft: 16
   },
+  activityIndicator:{
+    flex: 1,
+    flexDirection: "row"
+  }
 });
