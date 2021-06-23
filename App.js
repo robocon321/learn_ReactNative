@@ -3,25 +3,33 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import CategoryListItem from './components/CategoryListItem';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <ScrollView style={{paddingLeft:16, paddingRight:16}}>
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-        <CategoryListItem />
-      </ScrollView>
-    </View>
-  );
+export default class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      categories: [
+        {id: 1, name: "HTML"},
+        {id: 2, name: "CSS"},
+        {id: 3, name: "Java"},
+        {id: 4, name: "Javascript"},
+        {id: 5, name: "Python"}
+      ]
+    }
+  }
+  render(){
+    const {categories} = this.state;
+    return (
+      <View style={styles.container}>
+        <ScrollView style={{paddingLeft:16, paddingRight:16}}>
+          {
+            categories.map((item)=>{
+              return <CategoryListItem key={item.id} category={item}/>
+            })
+          }
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
