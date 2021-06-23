@@ -3,7 +3,9 @@ import {
     StyleSheet,
     View,
     Text,
-    Image
+    Image,
+    TouchableOpacity,
+    Alert
 } from 'react-native'
 import HtmlImage from '../assets/html.png';
 
@@ -11,10 +13,14 @@ export default function CategoryListItem(props){
     const {category} = props;
 
     return (
-        <View style={styles.categoryView}>
-            <Text style={styles.categoryText}>{category.name}</Text>
-            <Image style={styles.categoryImage} source={HtmlImage}/>
-        </View>
+        <TouchableOpacity activeOpacity={0.5} onPress={()=>{
+            Alert.alert("Title", "Message");
+        }}>
+            <View style={styles.categoryView}>
+                <Text style={styles.categoryText}>{category.name}</Text>
+                <Image style={styles.categoryImage} source={HtmlImage}/>
+            </View>
+        </TouchableOpacity>
     );
 }
 
