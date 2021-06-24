@@ -1,34 +1,39 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, Text} from 'react-native';
-
+import { StyleSheet, View, Text} from 'react-native';
+import PagerView from 'react-native-pager-view';
 export default class App extends React.Component{  
 
   render(){
-    const image = {uri:"https://reactjs.org/logo-og.png"}
+    const onPageScrollStateChanged = (e)=>{
+      console.log(e)
+    }
+
+    const onPageSelected = (state)=>{
+        console.log(state);
+    }
     return (
-      <View  style={styles.container}>
-        <ImageBackground source={image} style={styles.image}>
-          <Text  style={styles.text}>Hello world</Text>
-        </ImageBackground>
-      </View>
+      <PagerView style={styles.container} initialPage = {0} onPageSelected={onPageSelected} onPageScrollStateChanged={onPageScrollStateChanged}>
+        <View key={0} style={{...styles.container, backgroundColor: "#32a852"}}>
+          <Text>Screen 0</Text>
+        </View>
+        <View key={1} style={{...styles.container, backgroundColor: "#3c32a8"}}>
+          <Text>Screen 1</Text>
+        </View>
+        <View key={2} style={{...styles.container, backgroundColor: "#a0a832"}}>
+          <Text>Screen 2</Text>
+        </View>
+        <View key={3} style={{...styles.container, backgroundColor: "#a86132"}}>
+          <Text>Screen 3</Text>
+        </View>
+      </PagerView>      
     )
   } 
 }
 
 const styles = StyleSheet.create({
   container:{
-    flex:1,
-    flexDirection: "column"
-  },
-  image: {
     flex: 1,
-    justifyContent:"center"
-  },
-  text:{
-    color: "white",
-    fontSize: 42,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000a0"    
+    justifyContent: "center",
+    alignItems: "center"
   }
 })
