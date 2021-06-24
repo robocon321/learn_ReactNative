@@ -1,31 +1,41 @@
 import React from 'react';
-import { StyleSheet, View, Text} from 'react-native';
-import PagerView from 'react-native-pager-view';
-export default class App extends React.Component{  
+import { StyleSheet, View, Text, FlatList, Image} from 'react-native';
+import data from './data/db';
 
+class FlatListItem extends React.Component{
   render(){
-    const onPageScrollStateChanged = (e)=>{
-      console.log(e)
-    }
-
-    const onPageSelected = (state)=>{
-        console.log(state);
+    const {item, index} = this.props;
+    const style = {
+      flex: 1,
+      flexDirection: "row",
+      backgroundColor: index % 2 == 0 ? "#ffeeed" : "#edfff5",
+      paddingVertical: 10,
+      paddingLeft: 10,
+      justifiContent: "center", 
+      alignItems: "center"
     }
     return (
-      <PagerView style={styles.container} initialPage = {0} onPageSelected={onPageSelected} onPageScrollStateChanged={onPageScrollStateChanged}>
-        <View key={0} style={{...styles.container, backgroundColor: "#32a852"}}>
-          <Text>Screen 0</Text>
+      <View {...style}>
+        <Image source={{uri: item.image}} style={styles.image}/>
+        <View>
+            <Text style={styles.title}>{item.title}</Text>
+            <Text>{item.describe}</Text>
         </View>
-        <View key={1} style={{...styles.container, backgroundColor: "#3c32a8"}}>
-          <Text>Screen 1</Text>
-        </View>
-        <View key={2} style={{...styles.container, backgroundColor: "#a0a832"}}>
-          <Text>Screen 2</Text>
-        </View>
-        <View key={3} style={{...styles.container, backgroundColor: "#a86132"}}>
-          <Text>Screen 3</Text>
-        </View>
-      </PagerView>      
+      </View>
+    )
+  }
+}
+export default class App extends React.Component{  
+  render(){
+    return (
+      <View style={styles.container}>
+        <FlatList data={data}
+                  renderItem={({item, index})=>(
+                    <FlatListItem item={item} index={index} />
+                  )}
+                  keyExtractor={(item)=> `${item.id}`}
+        />
+      </View>    
     )
   } 
 }
@@ -33,7 +43,15 @@ export default class App extends React.Component{
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    marginTop:30,
+  },
+  title:{
+    fontSize: 20,
+    fontWeight:"bold"
+  }, 
+  image:{
+    marginRight:10,
+    width: 50,
+    height: 50
   }
 })
